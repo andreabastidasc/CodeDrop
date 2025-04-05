@@ -1,0 +1,23 @@
+# Node modules
+**/node_modules
+
+# Build artifacts
+client/build
+server/dist
+
+# Environment variables
+**/.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS/IDE junk
+.DS_Store
+.env.*
+.vscode
+*.swp
+
+##lock files
+client/package-lock.json
+server/package-lock.json
