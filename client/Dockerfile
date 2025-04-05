@@ -1,17 +1,15 @@
-# Step 1: Build the React app
-FROM node:18 AS build
-
-WORKDIR /app
-COPY . .
-RUN npm install
-RUN npm run build
-
-# Step 2: Serve the build folder with a lightweight HTTP server
+# Dev-friendly Dockerfile
 FROM node:18
 
+# Set working directory
 WORKDIR /app
-RUN npm install -g serve
-COPY --from=build /app/build ./build
 
-EXPOSE 3000
-CMD ["serve", "-s", "build", "-l", "3000"]
+# Install dependencies first (this helps cache them)
+COPY package*.json ./
+RUN npm install
+
+# Copy the rest of the source code
+COPY . .
+
+# Start React app (hot reload enabled)
+CMD ["npm", "start"]
