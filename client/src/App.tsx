@@ -3,12 +3,15 @@ import { useState } from "react";
 
 import { AuthProvider } from "context/AuthContext";
 import { darkTheme, lightTheme } from "styles/theme";
+import CodeEditor from "components/molecules/CodeEditor";
 import GlobalStyle from "styles/GlobalStyle";
 import LoginButton from "components/molecules/LoginButton";
 
 
 const App = () => {
     const [ isDark, setIsDark ] = useState(false);
+    const [ code, setCode ] = useState("<h1>Hello, world!</h1>");
+    const [ language, setLanguage ] = useState("html");
 
     return (
         <AuthProvider>
@@ -21,6 +24,13 @@ const App = () => {
                     <Title>
                         Code<Accent>Drop</Accent>
                     </Title>
+
+                    <CodeEditor
+                        value={ code }
+                        language={ language }
+                        theme={ isDark ? "vs-dark" : "light" }
+                        onChange={ (val) => setCode(val || "") }
+                    />
                 </Container>
             </ThemeProvider>
         </AuthProvider>
