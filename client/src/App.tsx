@@ -1,7 +1,9 @@
 import styled, { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme } from "styles/theme";
 import { useState } from "react";
 
+import { AuthProvider } from "context/AuthContext";
+import { darkTheme, lightTheme } from "styles/theme";
+import GlobalStyle from "styles/GlobalStyle";
 import LoginButton from "components/molecules/LoginButton";
 
 
@@ -9,16 +11,17 @@ const App = () => {
     const [isDark, setIsDark] = useState(false);
 
     return (
-        <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-            <Container>
-                <Navbar>
-                    <Title>CodeDrop</Title>
+        <AuthProvider>
+            <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+                <GlobalStyle/>
+                <Container>
                     <LoginButtonWrapper>
                         <LoginButton />
                     </LoginButtonWrapper>
-                </Navbar>
-            </Container>
-        </ThemeProvider>
+                    {/* <Title>CodeDrop</Title> */}
+                </Container>
+            </ThemeProvider>
+        </AuthProvider>
     );
 };
 
@@ -29,15 +32,8 @@ const Container = styled.div`
     flex-direction: column;
     min-height: 100vh;
     background: ${({ theme }) => theme.background};
-`;
-
-const Navbar = styled.header`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 2rem;
-    background: ${({ theme }) => theme.surfacePrimary};
-    color: ${({ theme }) => theme.text};
+    max-width: 1048px;
+    padding: 14px 0px;
 `;
 
 const Title = styled.h1`
@@ -47,6 +43,6 @@ const Title = styled.h1`
 `;
 
 const LoginButtonWrapper = styled.div`
-  position: absolute;
-  right: 2rem;
+    position: absolute;
+    right: 2rem;
 `;
