@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+
+import { FcGoogle } from "react-icons/fc";
 import { useAuth } from "context/AuthContext";
 
 
@@ -9,11 +11,16 @@ const LoginButton: React.FC = () => {
     return (
         <Wrapper>
             {user ? (
-                <Button onClick={logout}>
-                    👋 {user.displayName?.split(" ")[0]} | Logout
+                <Button onClick={ logout }>
+                    Welcome { user.displayName?.split(" ")[0] }! | Logout
                 </Button>
             ) : (
-                <Button onClick={login}>🔐 Login with Google</Button>
+                <Button onClick={ login }>
+                    <span style={{ display: "flex", alignItems: "center" }}>
+                        <FcGoogle style={{ marginRight: "8px" }} />
+                        Login with Google
+                    </span>
+                </Button>
             )}
         </Wrapper>
     );
@@ -32,7 +39,11 @@ const Button = styled.button`
     border: none;
     background-color: ${({ theme }) => theme.secondary};
     color: ${({ theme }) => theme.secondaryText};
-    font-weight: 600;
+    font-weight: 400;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    border-radius: 2rem;
+    font-size: 1rem;
+    line-height: 18px;
+    height: 40px;
 `;
