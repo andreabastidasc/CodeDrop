@@ -8,17 +8,19 @@ import LoginButton from "components/molecules/LoginButton";
 
 
 const App = () => {
-    const [isDark, setIsDark] = useState(false);
+    const [ isDark, setIsDark ] = useState(false);
 
     return (
         <AuthProvider>
-            <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+            <ThemeProvider theme={ isDark ? darkTheme : lightTheme }>
                 <GlobalStyle/>
                 <Container>
                     <LoginButtonWrapper>
                         <LoginButton />
                     </LoginButtonWrapper>
-                    {/* <Title>CodeDrop</Title> */}
+                    <Title>
+                        Code<Accent>Drop</Accent>
+                    </Title>
                 </Container>
             </ThemeProvider>
         </AuthProvider>
@@ -34,12 +36,20 @@ const Container = styled.div`
     background: ${({ theme }) => theme.background};
     max-width: 1048px;
     padding: 14px 0px;
+    margin: 0 auto;
 `;
 
 const Title = styled.h1`
-    font-size: 1.5rem;
+    font-size: 3rem;
     margin: 0;
     color: ${({ theme }) => theme.primary};
+    font-family: "Playwrite BE VLG", cursive;
+    margin: 0 auto;
+    margin-top: 8rem;
+`;
+
+const Accent = styled.span`
+  color: ${({ theme }) => theme.text};
 `;
 
 const LoginButtonWrapper = styled.div`
